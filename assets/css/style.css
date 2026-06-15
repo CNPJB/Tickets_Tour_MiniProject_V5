@@ -1,0 +1,2120 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+:root {
+  --color-primary: #007bff; /* สีหลักเว็บ */
+  --color-danger: #f44336; /* ปุ่มยกเลิก */
+  --color-background: #f9f9f9; /* พื้นหลัง modal */
+  --color-text: #333; /* สีข้อความ */
+  --color-button: #f9d923; /* ปุ่มยืนยัน */
+  --color-button-hover: #222; /* ปุ่มยืนยัน hover */
+  --color-white: white;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  min-height: 100vh; /* ครอบคลุมความสูงของหน้าจอ */
+}
+
+
+/*  NAVBAR*/
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #222;
+  padding: 0.5rem 1.5rem;
+  color: #fff;
+  /* cursor: pointer; */
+}
+
+.navbar .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar ul li {
+  margin-left: 1.5rem;
+}
+
+.navbar ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.navbar ul li a:hover {
+  color: #f9d923;
+}
+
+.navbar .menu-toggle {
+  display: none;
+  flex-direction: column;
+}
+
+.navbar .bar {
+  width: 25px;
+  height: 3px;
+  background: #fff;
+  margin: 4px 0;
+  transition: 0.4s;
+}
+
+.navbar ul li.nav-dropdown {
+  position: relative;
+}
+
+.navbar ul li .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #222;
+  min-width: 180px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  border-radius: 0 0 8px 8px;
+  z-index: 99;
+  padding: 0.5em 0;
+}
+.navbar ul li .dropdown-menu li {
+  margin: 0;
+}
+
+.navbar ul li .dropdown-menu li a {
+  display: block;
+  padding: 0.7em 1.2em;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+.dropdown-menu li a:hover {
+  background: var(--color-button);
+  color: #222;
+}
+
+/* Auth buttons */
+.nav-auth {
+  display: flex;
+  gap: 0.75rem;
+  margin-left: 1.5rem;
+}
+
+.btn-admin,
+.btn-login,
+.btn-register {
+  padding: 0.4em 1.1em;
+  border-radius: 20px;
+  border: none;
+  background: #f9d923;
+  color: #222;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-admin:hover,
+.btn-login:hover,
+.btn-register:hover {
+  background: #fff;
+  color: #f9d923;
+}
+
+/* User styles */
+.user-mini {
+  display: flex;
+  /* align-items: center; */
+  gap: 0.5rem;
+  font-size: 1rem;
+  background: #f9d923;
+  color: #222;
+  border-radius: 20px;
+  padding: 0.4em 1.1em;
+  font-weight: 600;
+}
+
+/* Modal Styles (ใช้ร่วมกันทั้ง Register และ Login) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background: #fff;
+  margin: 5% auto;
+  padding: 2rem 2.5rem;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
+}
+
+.close-modal {
+  color: #222;
+  position: absolute;
+  top: 10px;
+  right: 18px;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#registerForm label,
+#loginForm label {
+  display: block;
+  margin-top: 1rem;
+  color: #222;
+}
+
+#registerForm input,
+#loginForm input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+#registerForm button,
+#loginForm button {
+  margin-top: 1.2rem;
+  width: 100%;
+  background: #f9d923;
+  color: #222;
+  border: none;
+  border-radius: 20px;
+  padding: 0.6em 0;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+#registerForm button:hover,
+#loginForm button:hover {
+  background: #222;
+  color: #f9d923;
+}
+
+#registerMsg,
+#loginMsg {
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: bold;
+  min-height: 1.2em;
+}
+
+/* Introduce section */
+/* div คลุมข้างนอก */
+.wrapper {
+  max-width: 1200px;
+  margin: 50px auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.header span {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #3b82f6;
+  background: #eef2ff;
+  padding: 6px 16px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1e3a8a;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr;
+  gap: 24px;
+}
+
+/* การ์ดใหญ่ */
+.big-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  color: #fff;
+  min-height: 440px;
+  width: 100%;
+  background: url("../img/tour_oldtrafford_1.jpg") center/cover no-repeat;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.big-card .tag {
+  display: inline-block;
+  background: #2563eb;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.big-card h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.big-card .location {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.big-card p {
+  font-size: 14px;
+  line-height: 1.4;
+  margin-bottom: 15px;
+}
+
+.big-card .price {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.big-card button {
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.big-card button:hover {
+  background: var(--color-button);
+  color: var(--color-text);
+}
+/* การ์ดเล็ก */
+.small-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.small-card {
+  display: flex;
+  gap: 16px;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  padding: 16px;
+  align-items: center;
+}
+
+.small-card img {
+  width: 120px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.small-card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #111;
+}
+
+.small-card .location {
+  font-size: 12px;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+.small-card p {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+.small-card .price {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 4px;
+}
+
+.small-card a {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 2px;
+  border-radius: 20px;
+  color: var(--color-text);
+  text-decoration: none;
+  background-color: var(--color-button);
+}
+
+.small-card:hover {
+  box-shadow: 0 8px 24px rgba(157, 163, 167, 0.15);
+  transform: translateY(-4px) scale(1.03);
+  transition: all 0.3s ease;
+  background-color: #fdf9c5;
+}
+
+/* Footer Styles */
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  background: #222;
+  color: #fff;
+  padding: 32px 0;
+  justify-content: center;
+}
+
+.footer-col {
+  flex: 1;
+  min-width: 100px;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.footer-col h3 {
+  margin-bottom: 1em;
+  font-size: 1.2em;
+  color: #f9d923;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-col ul li {
+  margin-bottom: 0.7em;
+}
+
+.footer-col a,
+.footer-col ul li a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-col a:hover,
+.footer-col ul li a:hover {
+  color: #f9d923;
+  text-decoration: underline;
+}
+
+.footer-col p {
+  margin: 0;
+  line-height: 1.7;
+  font-size: 1em;
+}
+
+footer > div:last-child {
+  text-align: center;
+  background: #111;
+  color: #ccc;
+  padding: 8px 0;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.header-Tours {
+  background-color: #31312e;
+  color: white;
+  text-align: center;
+  margin: 20px auto;
+  width: 60%;
+  display: block;
+  border-radius: 10px;
+}
+
+/* Main tours */
+.container-main-tour {
+  display: flex;
+  gap: 5px;
+  padding: 20px;
+  width: 75%;
+  align-items: stretch;
+  margin: 0 auto;
+}
+
+/* ฝั่งซ้าย */
+.left-main-tour {
+  flex: 2;
+  background: #e3f2fd;
+  border-radius: 10px;
+  padding: 20px;
+  width: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.left-main-tour-slider {
+  width: 100%;
+  max-width: 700px;
+  aspect-ratio: 16/9;
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto 20px auto;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  background: #f7f7f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.left-main-tour-slide {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: opacity 0.5s;
+  border-radius: 16px;
+}
+
+.slide-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(30, 30, 30, 0.5);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  font-size: 1.5em;
+  cursor: pointer;
+  z-index: 2;
+  transition: background 0.2s;
+}
+
+.prev-btn {
+  left: 10px;
+}
+
+.next-btn {
+  right: 10px;
+}
+
+.slide-btn:hover {
+  background: #f9d923;
+  color: #222;
+}
+
+.left-main-tour img {
+  width: 100%;
+  height: 400px;
+  border-radius: 10px;
+}
+
+.left-main-tour h2 {
+  margin: 15px 0 5px;
+}
+
+.left-main-tour p {
+  color: #333;
+  line-height: 1.5;
+}
+
+.left-main-tour .price {
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 10px;
+  color: #2c3e50;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 18px;
+  background: #111;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 20px;
+}
+
+/* ฝั่งขวา */
+.right-main-tour {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  /* เพิ่ม */
+}
+
+.main-tour-small {
+  background: #fff;
+  padding: 15px;
+  height: 100%;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.main-tour-small img {
+  width: 60px;
+  margin-bottom: 10px;
+}
+
+.main-tour-small h3 {
+  margin: 0 0 5px;
+  font-size: 16px;
+}
+
+.main-tour-small p {
+  font-size: 14px;
+  color: #444;
+  margin: 5px 0;
+}
+
+.main-tour-small .price {
+  font-weight: bold;
+  color: #2980b9;
+}
+
+.main-tour-small a {
+  display: inline-block;
+  margin-top: 10px;
+  color: #2980b9;
+  text-decoration: none;
+  font-size: 14px;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 90%;
+}
+
+.right-main-tour img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+/* Sidebar styles for admin panel */
+.admin-sidebar {
+  width: 20%;
+  background: #222;
+  color: #fff;
+  padding: 30px 0;
+  min-height: 100%;
+}
+
+.admin-sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.admin-sidebar nav ul li {
+  margin-bottom: 30px;
+}
+
+.admin-sidebar nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 10px 30px;
+  display: block;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.admin-sidebar nav ul li a:hover {
+  background: #444;
+}
+
+.admin-main {
+  flex: 1;
+  padding: 40px;
+  background: #f7f7f7;
+}
+
+.admin-flex {
+  display: flex;
+  min-height: 100vh;
+}
+
+/*---------------------------------------------------------*/
+.ticket-type-btns {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  /* ให้ปุ่มเล็กลงแล้ว wrap บรรทัดใหม่ได้ */
+  margin-top: 10px;
+  justify-content: center;
+}
+
+.ticket-type-btns p {
+  flex-basis: 100%;
+  /* ให้กินทั้งแถว */
+  text-align: center;
+}
+
+.ticket-price {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/*---------------------------------------------------------*/
+
+.btn-type {
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: 1px solid #2563eb;
+  background: #fff;
+  color: #2563eb;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-type.active {
+  background: #2563eb;
+  color: #fff;
+}
+
+.ticket-info {
+  margin-top: 8px;
+  font-size: 1em;
+  color: #222;
+}
+
+.checkbook {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+.checkbook .price {
+  font-weight: bold;
+  color: #2980b9;
+  font-size: 16px;
+}
+
+.checkbook .number {
+  width: 40px;
+}
+
+.number {
+  display: inline;
+}
+
+.btn-book {
+  display: block;
+  margin: 10px auto;
+  /* ให้อยู่กึ่งกลางการ์ด */
+  width: 70%;
+  /* กว้างประมาณ 70% ของการ์ด */
+  max-width: 220px;
+  /* จำกัดไม่ให้ใหญ่เกินไป */
+  height: 40px;
+  border-radius: 8px;
+  background: #f9d923;
+  color: #000;
+  font-size: 0.95rem;
+  font-weight: bold;
+  border: 1px solid #333;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+/* Hover */
+.btn-book:hover {
+  background: #000;
+  color: #fff;
+}
+
+/* Admin - User Management Start*/
+/* Main */
+.admin-main {
+  flex: 1;
+  padding: 30px;
+  background: #fff;
+  margin: 20px;
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.table-container {
+  flex: 2;
+  width: 60%;
+  max-height: 80vh;
+  overflow-y: auto;
+  /* เลื่อนในแนวตั้ง */
+  overflow-x: auto;
+  /* เลื่อนแนวนอน */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+#usersTable {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+}
+
+#usersTable th,
+#usersTable td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+#usersTable thead th {
+  position: sticky;
+  top: 0;
+  background: #f9d923;
+  z-index: 2;
+}
+
+tr:hover {
+  background: #fef5c3;
+}
+
+#editUserForm #adminMsg {
+  margin-top: 15px;
+  font-weight: bold;
+  color: #e53935;
+  text-align: center;
+}
+
+/* Edit User Form */
+
+#editUserForm {
+  flex: 1;
+  margin-top: 0;
+  max-width: 340px;
+  background: #fff;
+  padding: 28px 24px 18px 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.09);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#editUserForm h2 {
+  margin-bottom: 18px;
+  color: #222;
+  font-size: 1.3em;
+}
+
+#editUserForm form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+#editUserForm label {
+  font-weight: 600;
+  color: #222;
+}
+
+#editUserForm input[type="text"],
+#editUserForm input[type="email"],
+#editUserForm select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+#editUserForm button {
+  margin-top: 25px;
+  margin-left: 30px;
+  padding: 10px 0;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1em;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  width: 100px;
+}
+
+#editUserForm #uptUserBtn {
+  background: #6dd154;
+}
+
+#editUserForm #uptUserBtn:hover {
+  background: #a1dc92;
+}
+
+#editUserForm #delUserBtn {
+  background: #e53935;
+}
+
+#editUserForm #delUserBtn:hover {
+  background: #ff7961;
+}
+
+/* Admin - User Management End*/
+
+/*---------------------------------------------------------*/
+
+/* Admin - Tour Management Start*/
+
+/* Booking Modal Overlay */
+.booking-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none; /* จะเปิดด้วย JS */
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.6); /* มืดขึ้นหน่อย */
+  z-index: 9999;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* Modal Content Box */
+.booking-modal-content {
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 16px;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  animation: scaleUp 0.3s ease forwards;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Close button */
+.booking-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #888;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.booking-close:hover {
+  color: #f44336; /* สีแดงเด่น */
+}
+
+/* Modal Title */
+.booking-modal-content h3 {
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+/* Modal Text */
+.booking-modal-content p {
+  margin-bottom: 25px;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Buttons Container */
+.booking-modal-actions {
+  display: flex;
+  justify-content: space-around;
+  gap: 15px;
+}
+
+/* Confirm Button */
+.btn-booking-confirm {
+  background-color: var(--color-button); /* เขียวสด */
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.btn-booking-confirm:hover {
+  background-color: var(--color-button-hover);
+  transform: scale(1.05);
+}
+
+/* Cancel Button */
+.btn-booking-cancel {
+  background-color: #f44336; /* แดงสด */
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.btn-booking-cancel:hover {
+  background-color: #e53935;
+  transform: scale(1.05);
+}
+
+.tour-description {
+  display: none;
+}
+/* === Main Admin Layout (Sidebar + Main Content) === */
+
+/* === Main Content Area === */
+.admin-main-tours {
+  flex-grow: 1; /* Allows this element to take up the remaining space */
+  padding: 30px;
+  background-color: #ffffff;
+}
+
+.admin-main h2 {
+  color: #333;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 10px;
+  margin-top: 0;
+  margin-bottom: 25px;
+}
+
+/* === Form Styling === */
+.tour-selection-box {
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+#tourForm {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Three columns layout */
+  gap: 20px 30px; /* Row and column gap */
+  margin-bottom: 40px;
+}
+
+/* Image inputs preview layout: keep two image fields side-by-side and
+   constrain preview sizes so they don't push other elements around. */
+.image-row {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  width: 100%;
+  grid-column: 1 / -1; /* span full width of the grid form */
+}
+.image-col {
+  flex: 1 1 50%;
+  display: flex;
+  flex-direction: column;
+}
+.image-col input[type="file"] {
+  margin-top: 6px;
+}
+.preview-box {
+  width: 150px;
+  height: 100px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #f5f5f5;
+  display: block;
+  margin-top: 8px;
+}
+.preview-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Style for each form element group */
+#tourForm label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #222;
+}
+
+#tourForm input[type="text"],
+#tourForm input[type="date"],
+#tourForm input[type="time"],
+#tourForm input[type="number"],
+#tourForm select,
+#tourForm textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+#tourForm textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+#submitBtn {
+  grid-column: 1 / -1; /* Make button span both columns */
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: #6dd154;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#submitBtn:hover {
+  background-color: #a1dc92;
+}
+
+#formMsg {
+  margin-top: 15px;
+  font-weight: 500;
+}
+
+/* === Table Styling === */
+#toursTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 30px;
+}
+
+#toursTable th,
+#toursTable td {
+  border: 1px solid #eee;
+  padding: 12px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+#toursTable thead th {
+  background-color: var(--color-button);
+  font-weight: 600;
+  color: #333;
+}
+
+#toursTable tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#toursTable tbody tr:hover {
+  background-color: #fef5c3;
+}
+
+/* User ticket style */
+.container-my_tickets h1 {
+  text-align: center;
+  background-color: var(--color-button);
+  border-radius: 25px;
+  margin-top: 3%;
+}
+.container-my_tickets {
+  max-width: 1400px;
+  margin: 0 auto 100px;
+  padding: 0 20px;
+}
+.ticket-grid-my_tickets {
+  display: grid;
+  grid-template-columns: repeat(1fr, 1fr);
+  gap: 25px;
+}
+
+.ticket-card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.ticket-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.card-header {
+  padding: 20px;
+  background-color: #f0f4f7;
+  border-bottom: 1px solid #e0e6ed;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-radius: 15px 15px 0 0;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #0056b3;
+}
+
+.card-body {
+  padding: 20px;
+  flex-grow: 1;
+}
+
+.card-body p {
+  margin: 0 0 12px 0;
+  line-height: 1.6;
+}
+
+.card-body p strong {
+  color: #555;
+  margin-right: 8px;
+}
+
+.card-footer {
+  padding: 15px 20px;
+  background-color: #fafafa;
+  border-top: 1px solid #e0e6ed;
+  font-size: 0.8rem;
+  color: #777;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 0 0 15px 15px;
+}
+
+.card-footer p {
+  margin: 0;
+}
+
+/* Ticket Status Badge */
+.ticket-status {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.status-confirmed {
+  background-color: #28a745;
+  color: var(--color-white);
+}
+
+.status-pending {
+  background-color: var(--color-button);
+  color: var(--color-white);
+}
+
+.status-canceled {
+  background-color: var(--color-danger);
+  color: var(--color-white);
+}
+.status-expired {
+  background-color: gray;
+  color: var(--color-white);
+}
+.status-used {
+  background-color: #007bff;
+  color: var(--color-white);
+}
+/* #status-message-my_tickets */
+#status-message-my_tickets {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #666;
+  padding: 40px;
+}
+
+/* Contact Style */
+.contact-support-main {
+  background: url(../img/contact_cover_3.webp) center/cover no-repeat;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0 80px 0;
+}
+.contact-support-title {
+  color: #fff;
+  font-size: 3em;
+  font-family: serif;
+  font-weight: 400;
+  margin-bottom: 40px;
+  text-shadow: 0 2px 16px rgba(237, 232, 195, 2);
+}
+.contact-support-cards {
+  display: flex;
+  gap: 48px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.contact-support-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(206, 202, 202, 0.445);
+  width: 320px;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s;
+}
+.contact-support-card:hover {
+  background-color: #fef5c5;
+  transform: scale(1.05);
+}
+.contact-support-icon {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-support-icon img {
+  height: 35px;
+  margin-bottom: 18px;
+  transition: height 0.25s;
+}
+
+.contact-support-icon img:hover {
+  height: 50px;
+}
+.contact-support-label {
+  font-size: 1.1em;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  color: #222;
+}
+
+/* css admin ticket*/
+
+.container-tickets {
+  max-width: 1500px;
+  margin: 20px auto;
+  padding: 0 16px;
+  display: block;
+}
+
+.controls-tickets {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 14px;
+  margin-bottom: 10px;
+}
+
+.controls-tickets .search {
+  flex: 1;
+}
+
+.controls-tickets input[type="search"],
+.controls-tickets select {
+  padding: 8px 10px;
+  border: 1px solid #d8d8d8;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/*ส่วนแสดงบัตร/ตาราง */
+.card-tickets {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 6px 20px rgba(11, 20, 30, 0.04);
+}
+
+/* 📋 ตารางหลัก */
+.table-wrap {
+  max-height: 68vh;
+  overflow-y: auto;
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+#ticketsTable {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 920px;
+}
+
+#ticketsTable thead th {
+  position: sticky;
+  top: 0;
+  background: #f9d923;
+  color: #222;
+  z-index: 2;
+  padding: 12px 14px;
+  text-align: left;
+}
+
+#ticketsTable tbody td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #f1f1f1;
+  vertical-align: middle;
+}
+
+#ticketsTable tbody tr:hover {
+  background: #fff9e6;
+}
+
+/* 🎫 สถานะและปุ่ม */
+.status-select {
+  padding: 6px 8px;
+  border: 1px solid #cfcfcf;
+  border-radius: 6px;
+}
+
+.save-btn {
+  padding: 3px 5px;
+  border-radius: 8px;
+  border: none;
+  background: #1976d2;
+  color: #fff;
+  cursor: pointer;
+}
+
+.save-btn[disabled] {
+  display: none;
+}
+
+/* 🗨️ ข้อความสถานะ */
+.msg {
+  margin-top: 12px;
+  min-height: 20px;
+  font-weight: 600;
+}
+.msg.success {
+  color: #2e7d32;
+}
+.msg.error {
+  color: #c62828;
+}
+/* === Responsive Design for smaller screens === */
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes scaleUp {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ✅ Responsive Styles - max-width: 1024px */
+@media (max-width: 1024px) {
+  .navbar {
+    padding: 0.5rem 0.5rem;
+  }
+
+  .wrapper {
+    max-width: 98vw;
+    margin: 30px auto;
+  }
+
+  .container {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .admin-flex {
+    flex-direction: column;
+  }
+
+  .admin-sidebar {
+    width: 100%;
+    padding: 20px;
+    min-height: auto;
+    text-align: center;
+  }
+
+  .admin-sidebar nav ul li {
+    display: inline-block;
+    margin: 0 10px 20px 10px;
+  }
+
+  .admin-sidebar nav ul li a {
+    padding: 10px 20px;
+  }
+
+  .admin-main {
+    padding: 20px;
+    margin: 0;
+    flex-direction: column;
+  }
+
+  .table-container,
+  #editUserForm {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  #editUserForm {
+    margin-top: 30px;
+  }
+
+  #tourForm {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ✅ Responsive Styles - max-width: 992px */
+@media (max-width: 992px) {
+  .admin-flex {
+    flex-direction: column;
+  }
+
+  .admin-sidebar {
+    width: 100%;
+    padding: 20px;
+    min-height: auto;
+    text-align: center;
+  }
+
+  .admin-sidebar nav ul li {
+    display: inline-block;
+    margin: 0 10px 20px 10px;
+  }
+
+  .admin-sidebar nav ul li a {
+    padding: 10px 20px;
+  }
+}
+
+/* ✅ Responsive Styles - max-width: 900px */
+@media (max-width: 900px) {
+  .left-main-tour {
+    display: none;
+  }
+  .main-tour-small {
+    width: 100%;
+  }
+  .tour-description {
+    display: block;
+    margin-top: 15px;
+    color: #333;
+    line-height: 1.5;
+  }
+  .container {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .big-card {
+    min-height: 280px;
+    padding: 12px;
+  }
+  .big-card img {
+    width: 100%;
+    height: auto;
+    max-width: 450px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .big-card p,
+  .big-card .price,
+  .big-card h2,
+  .big-card .location {
+    display: none;
+  }
+
+  .small-card img {
+    width: 90px;
+    height: 60px;
+  }
+
+  .footer-container {
+    gap: 16px;
+    padding: 24px 0;
+  }
+
+  .footer-col {
+    min-width: 140px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  /* responsive maintour */
+  .container-main-tour {
+    flex-direction: column;
+    width: 75%;
+    padding: 10px;
+    gap: 0;
+  }
+
+  .left-main-tour,
+  .right-main-tour {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .left-main-tour img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .main-tour-small {
+    margin-top: 15px;
+    width: 100%;
+    height: auto;
+  }
+
+  .btn.book {
+    width: 60%;
+    height: 7%;
+  }
+
+  .controls-tickets {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* ✅ ให้ตารางเลื่อนแนวนอนได้ */
+  .table-wrap {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    border: 2px solid #f1f1f1;
+    padding-bottom: 10px;
+  }
+
+  /* ✅ ปรับขนาดตัวอักษร */
+  #ticketsTable th,
+  #ticketsTable td {
+    font-size: 13px;
+    padding: 8px 10px;
+    white-space: nowrap;
+  }
+
+  /* ✅ scrollbar สวย ๆ */
+  .table-wrap::-webkit-scrollbar {
+    height: 10px;
+  }
+
+  .table-wrap::-webkit-scrollbar-thumb {
+    background: #bdbdbd;
+    border-radius: 8px;
+  }
+
+  .table-wrap::-webkit-scrollbar-thumb:hover {
+    background: #9e9e9e;
+  }
+
+  .table-wrap::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+}
+
+/* ✅ Responsive Styles - min-width: 781px (ไม่ต้องย้าย) */
+@media (min-width: 781px) {
+  .navbar ul li.nav-dropdown:hover .dropdown-menu,
+  .navbar ul li.nav-dropdown:focus-within .dropdown-menu,
+  .navbar ul li.nav-dropdown .dropdown-menu:hover {
+    display: block;
+  }
+}
+
+/* ✅ Responsive Styles - max-width: 780px */
+@media (max-width: 780px) {
+  .logo {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .navbar ul {
+    position: absolute;
+    top: 50px;
+    left: -100%;
+    width: 40%;
+    height: calc(100vh - 60px);
+    background: #222;
+    flex-direction: column;
+    align-items: center;
+    transition: left 0.3s ease-in-out;
+    z-index: 100;
+    overflow-y: auto;
+  }
+
+  .navbar ul.active {
+    left: 0;
+  }
+
+  .navbar ul li {
+    margin: 1rem 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .navbar .menu-toggle {
+    display: flex;
+  }
+
+  .nav-auth {
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 0.5rem 0 0 0;
+    align-items: center;
+  }
+
+  .navbar ul li.nav-dropdown {
+    width: 100%;
+  }
+
+  .navbar ul li .dropdown-menu {
+    position: static;
+    min-width: unset;
+    box-shadow: none;
+    border-radius: 0;
+    background: #222;
+    padding: 0;
+    display: none;
+  }
+
+  .navbar ul li.nav-dropdown.active .dropdown-menu {
+    display: block;
+    width: 100%;
+  }
+
+  .navbar ul li .dropdown-menu li {
+    width: 100%;
+  }
+
+  .navbar ul li .dropdown-menu li a {
+    display: block;
+    width: 100%;
+    padding: 0.7em 1.2em;
+    background: transparent;
+    color: #fff;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .navbar ul li.nav-dropdown > a::after {
+    content: " ▼";
+    font-size: 0.8em;
+  }
+
+  .btn-book {
+    width: 60%;
+    height: 40px;
+    font-size: 0.9rem;
+  }
+
+  .btn-admin {
+    display: inline;
+  }
+}
+
+/* ✅ Responsive Styles - max-width: 768px */
+@media (max-width: 768px) {
+  #tourForm {
+    grid-template-columns: 1fr;
+  }
+
+  #submitBtn {
+    grid-column: 1;
+  }
+  .admin-sidebar nav ul li {
+    display: block;
+    margin: 10px 0;
+  }
+
+  .admin-main {
+    gap: 20px;
+    padding: 20px 15px;
+  }
+
+  .table-container {
+    overflow-x: auto;
+  }
+
+  #editUserForm {
+    padding: 20px;
+  }
+
+  #tourForm {
+    grid-template-columns: 1fr;
+  }
+
+  #submitBtn {
+    width: 100%;
+  }
+
+  .booking-modal-content {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .booking-modal-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn-booking-confirm,
+  .btn-booking-cancel {
+    width: 100%;
+  }
+}
+
+/* ✅ Responsive Styles - max-width: 700px */
+@media (max-width: 700px) {
+  .left-main-tour-slider {
+    max-width: 100vw;
+    aspect-ratio: 16/9;
+  }
+
+  .left-main-tour {
+    display: flex;
+    align-items: center;
+  }
+
+  .left-main-tour {
+    display: none;
+  }
+
+  .big-card p,
+  .big-card .price,
+  .big-card h2,
+  .big-card .location {
+    display: none;
+  }
+}
+
+/* ✅ Responsive Styles - max-width: 600px */
+@media (max-width: 600px) {
+  .left-main-tour {
+    display: none;
+  }
+  .wrapper {
+    margin: 10px auto;
+    padding: 0 4px;
+    max-width: 100vw;
+  }
+
+  .header h1 {
+    font-size: 20px;
+  }
+  .small-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .big-card {
+    text-align: center;
+  }
+
+  .big-card button {
+    width: 100%;
+    padding: 6px 8px;
+    font-size: 10px;
+  }
+
+  .big-card p,
+  .big-card .price,
+  .big-card h2,
+  .big-card .location {
+    display: none;
+  }
+  .small-card img {
+    height: 180px;
+    width: 40%;
+  }
+
+  .container {
+    padding: 0 2px;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 18px 0;
+  }
+
+  .footer-col {
+    width: 100%;
+    min-width: unset;
+    text-align: center;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0 8px;
+  }
+
+  .footer-col ul {
+    display: inline-block;
+    text-align: left;
+  }
+
+  .container-main-tour {
+    flex-direction: column;
+    width: 100%;
+    padding: 10px;
+    gap: 0;
+  }
+
+  .left-main-tour,
+  .right-main-tour {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .left-main-tour img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .main-tour-small {
+    margin-top: 15px;
+  }
+
+  .ticket-type-btns {
+    gap: 6px;
+  }
+
+  .ticket-type-btns .btn-type {
+    padding: 5px 10px;
+    font-size: 0.75rem;
+    flex: 1 1 45%;
+  }
+
+  .btn-book {
+    width: 80%;
+    height: 36px;
+    font-size: 0.85rem;
+  }
+}
+
+/* ✅ Responsive Styles - max-width: 480 */
+@media (max-width: 480px) {
+  .admin-main-tours {
+    padding: 12px 10px;
+  }
+
+  .admin-main-tours .table-container {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .admin-main-tours #toursTable {
+    width: 100%;
+    table-layout: fixed;
+    font-size: 0.8rem;
+    word-wrap: break-word;
+  }
+
+  .admin-main-tours #toursTable th,
+  .admin-main-tours #toursTable td {
+    padding: 6px;
+    font-size: 7px;
+  }
+
+  /* ปรับฟอร์มให้แนวตั้ง */
+  #tourForm {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  #submitBtn {
+    width: 100%;
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  /* ซ่อนคอลัมน์ไม่จำเป็นบนมือถือ (ตัวอย่าง) */
+  #toursTable th:nth-child(7),
+  #toursTable td:nth-child(7),
+  #toursTable th:nth-child(9),
+  #toursTable td:nth-child(9) {
+    display: none;
+  }
+  .container-tickets {
+    padding: 10px 8px;
+  }
+
+  .controls-tickets {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .controls-tickets select,
+  .controls-tickets input,
+  .controls-tickets button {
+    width: 100%;
+    font-size: 0.85rem;
+    padding: 8px;
+  }
+
+  /* ✅ ให้ตารางเลื่อนได้แนวนอน */
+  .table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+  }
+
+  /* ✅ ย่อขนาดตารางและปิด min-width เดิม */
+  #ticketsTable {
+    width: 100%;
+    min-width: unset;
+    table-layout: auto;
+    font-size: 0.7rem;
+    word-wrap: break-word;
+  }
+
+  #ticketsTable th,
+  #ticketsTable td {
+    padding: 4px 5px;
+    font-size: 0.55rem;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  #ticketsTable th {
+    background: #ffe95c;
+  }
+
+  /* ✅ ซ่อนคอลัมน์ที่ไม่จำเป็น */
+  #ticketsTable th:nth-child(2),
+  #ticketsTable td:nth-child(2),
+  #ticketsTable th:nth-child(3),
+  #ticketsTable td:nth-child(3),
+  #ticketsTable th:nth-child(7),
+  #ticketsTable td:nth-child(7),
+  #ticketsTable th:nth-child(8),
+  #ticketsTable td:nth-child(8) {
+    display: none;
+  }
+
+  /* ✅ ปุ่มให้เต็มจอ */
+  .save-btn,
+  #reloadBtn {
+    width: 100%;
+    padding: 8px;
+    font-size: 0.85rem;
+  }
+
+  /* ✅ scrollbar สำหรับมือถือ */
+  .table-wrap::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .table-wrap::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 8px;
+  }
+
+  .table-wrap::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
+  }
+
+  .big-card p,
+  .big-card .price,
+  .big-card h2,
+  .big-card .location {
+    display: none;
+  }
+}
+.admin-sidebar {
+  padding: 15px 10px;
+}
+
+.admin-sidebar nav ul li a {
+  font-size: 16px;
+  padding: 8px 16px;
+}
+
+#editUserForm button {
+  margin-left: 0;
+  width: 100%;
+}
+
+#tourForm input,
+#tourForm select,
+#tourForm textarea {
+  font-size: 0.95rem;
+}
+
+#submitBtn {
+  font-size: 1rem;
+}
+
+#usersTable th,
+#usersTable td,
+#toursTable th,
+#toursTable td {
+  padding: 8px 10px;
+  font-size: 0.9rem;
+}
+/* ป้องกันการเลื่อนแนวนอน */
+body {
+  overflow-x: hidden;
+}

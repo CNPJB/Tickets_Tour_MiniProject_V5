@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tickets Tour - Home Page</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <!-- Header Section - Start -->
+    <header>
+        <!-- Navigation Bar Start -->
+        <nav class="navbar">
+            <div class="logo">Ticket Tour</div>
+            <div class="menu-toggle" aria-label="Toggle navigation" tabindex="0">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="nav-dropdown">
+                    <a>Tours</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="tours-premierleague.html">Tour Premier league</a></li>
+                        <li><a href="tours-laliga.html">Tour Laliga</a></li>
+                        <li><a href="tours-bundesliga.html">Tour Bundesliga</a></li>
+                    </ul>
+                </li>
+                <li><a href="my_tickets.html">My Tickets</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-auth">
+                <a href="#" class="btn-login">Login</a>
+                <a href="#" class="btn-register">Register</a>
+            </div>
+        </nav>
+        <!-- Navigation Bar End -->
+
+        <!-- Register Modal -->
+        <div id="registerModal" class="modal" style="display:none;">
+            <div class="modal-content">
+                <span class="close-modal" id="closeRegisterModal">&times;</span>
+                <h2>Register</h2>
+                <form id="registerForm">
+                    <label for="reg-username">Username</label>
+                    <input type="text" id="reg-username" name="username" required>
+                    <label for="reg-email">Email</label>
+                    <input type="email" id="reg-email" name="email" required>
+                    <label for="reg-password">Password</label>
+                    <input type="password" id="reg-password" name="password" required>
+                    <button type="submit">Register</button>
+                </form>
+                <div id="registerMsg"></div>
+            </div>
+        </div>
+        <!-- Login Modal -->
+        <div id="loginModal" class="modal" style="display:none;">
+            <div class="modal-content">
+                <span class="close-modal" id="closeLoginModal">&times;</span>
+                <h2>Login</h2>
+                <form id="loginForm">
+                    <label for="login-username">Username or Email</label>
+                    <input type="text" id="login-username" name="usernameOrEmail" required>
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" name="password" required>
+                    <button type="submit">Login</button>
+                </form>
+                <div id="loginMsg"></div>
+            </div>
+        </div>
+
+        <!-- สร้าง UI หน้าซื้อขาย -->
+         
+    </header>
+    <!-- Header Section - End -->
+    <!-- Introduce Section -->
+    <div class="wrapper">
+        <div class="header">
+            <h1>Recommend Tours</h1>
+        </div>
+
+        <div class="container">
+            <!-- การ์ดใหญ่ -->
+            <div class="big-card">
+                <h2>Old trafford</h2>
+                <div class="location">Manchester</div>
+                <p>
+                    Old Trafford Stadium Tour - The Theatre of Dreams
+                    Step inside the legendary home of Manchester United and discover over a century of football history.
+                    Walk through the players'tunnel, visit the dressing rooms, and experience the pitchside view where unforgettable moments have
+                    taken place.
+                </p>
+                <div class="price">From $4500</div>
+                <button onclick="window.location.href='tours-premierleague.html'">View Details</button>
+            </div>
+
+            <!-- การ์ดเล็ก -->
+            <div class="small-cards">
+                <div class="small-card">
+                    <img src="assets/img/tour_1.jpg" alt="">
+                    <div>
+                        <h3>Stamford Bridge</h3>
+                        <div class="location"><img src="assets/img/location.png" style="height: 15px; width: 15px;">  London</div>
+                        <p>Experience the electric atmosphere inside Stamford Bridge.</p>
+                        <div class="price">Standard Price: $3700</div>
+                        <a href="tours-premierleague.html">View Details →</a>
+                    </div>
+                </div>
+
+                <div class="small-card">
+                    <img src="assets/img/tour_campNou.jpg" alt="">
+                    <div>
+                        <h3>Camp Nou</h3>
+                        <div class="location"><img src="assets/img/location.png" style="height: 15px; width: 15px;">  Barcelona</div>
+                        <p>Experience the thrill of walking out onto the Camp Nou pitch.</p>
+                        <div class="price">Standard Price: $4500</div>
+                        <a href="tours-laliga.html">View Details →</a>
+                    </div>
+                </div>
+
+                <div class="small-card">
+                    <img src="assets/img/tour_alianz.avif" alt="">
+                    <div>
+                        
+                        <h3>Allianz Arena</h3>
+                        <div class="location"><img src="assets/img/location.png" style="height: 15px; width: 15px;">  Munich</div>
+                        <p>With a capacity of 99,354, it is now the biggest stadium in Europe.</p>
+                        <div class="price"> Standard Price: $4500</div>
+                        <a href="tours-bundesliga.html">View Details →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer Section -->
+    <footer>
+      <div class="footer-container">
+        <!-- คอลัมน์ที่ 1: เมนู -->
+        <div class="footer-col">
+          <h3>Tours</h3>
+          <ul>
+            <li><a href="tours-premierleague.html">Tour Premier league</a></li>
+            <li><a href="tours-laliga.html">Tour Laliga</a></li>
+            <li><a href="tours-bundesliga.html">Tour Bundesliga</a></li>
+          </ul>
+        </div>
+        <!-- คอลัมน์ที่ 2: เนื้อหา -->
+        <div class="footer-col">
+          <h3>About Ticket Tour</h3>
+          <p>
+            A Football Stadium tour booking website that helps you find the best
+            tours and book them easily, conveniently, quickly, and securely.
+          </p>
+        </div>
+        <!-- คอลัมน์ที่ 3: ติดต่อ -->
+        <div class="footer-col">
+          <h3>Contact</h3>
+          <p>
+            Email: info@tickettour.com<br />
+            Tel.(+66): 96-852-6153<br />
+            <a href="contact.html">More..</a>
+          </p>
+        </div>
+      </div>
+      <div>&copy; 2025 Ticket Tour. All rights reserved.</div>
+    </footer>
+    <!-- script -->
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>
